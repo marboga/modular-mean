@@ -6,13 +6,17 @@ import './shared/rxjs-operators';
 
 @Injectable()
 export class UserService {
-
-  private apiUrl = 'http://localhost:8000/post'
-
   // Instantiate private Http module when class is instantiated
   constructor( private http: Http ) { }
 
-  sendUserName( name: string ): Observable<string> {
+  private apiUrl = 'http://localhost:8000/api'
+
+  getUsers(): Observable<[Object]>{
+    return this.http.get( this.apiUrl )
+      .map( this.extractData )
+      .catch( this.handleError )
+  }
+  sendUserName( name: string ): Observable<Object> {
     let body = JSON.stringify( { name })
     let headers = new Headers( { 'Content-Type': 'application/json' })
     let options = new RequestOptions( { headers: headers })
@@ -33,6 +37,6 @@ export class UserService {
 
   private extractData( res: Response ) {
     let body = res.json();
-    return body.data || {};
+    return body || {};
   }
 }

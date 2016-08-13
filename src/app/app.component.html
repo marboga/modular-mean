@@ -1,13 +1,24 @@
 <div class="jumbotron">
   <div class="container">
-    <h1>Who is you? <small *ngIf="name">Your name is {{name}}</small></h1>
+    <h1>Who is you?</h1>
   </div>
 </div>
 <div class="container">
   <div class="row">
-    <div class="col-md-6 form-group">
-      <input type="text" name="name" id="name" class="form-control" required #userName>
+    <div class="col-md-6">
+      <div class="form-group">
+        <input type="text" name="name" id="name" class="form-control" required #userName>
+      </div>
+      <div class="form-group">
+        <button type="submit" (click)="addName(userName.value); userName.value=''" class="btn btn-default">Click</button>
+      </div>  
+        
     </div>
-    <button type="submit" (click)="myName(userName.value); userName.value=''" class="btn btn-default">Click</button>
+    <div class="col-md-4" *ngIf="nameCollection">
+      <ul class="list-group">
+        <li *ngFor="let user of nameCollection" class="list-group-item">{{user.name}}</li>
+      </ul>
+    </div>
   </div>
+  <div class="error" *ngIf="errorMessage">{{errorMessage}}</div> 
 </div>
