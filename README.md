@@ -1,7 +1,7 @@
 # MEAN stack starter w/ TypeScript and Angular 2
 > Created by Nitish Dayal | Started: 8/12/2016
 
-**Note: This project is under currently under development. I really wouldn't bother playing around just yet, I've only just gotten started and it's probably pretty broken.**
+**Note: This project is currently under development. I really wouldn't bother playing around just yet, I've only just gotten started and it's probably pretty broken.**
 
 Yet another Angular 2/MEAN stack starter, hooray! Being created for personal use, but it should be able to serve as a reasonable starting point for a basic MEAN project.
 
