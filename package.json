@@ -6,8 +6,8 @@
   "scripts": {
     "start": "DEBUG=* nodemon dist/server/server.js",
     "lint": "tslint \"src/**/*.ts\"",
-    "build-server": "tsc db/server.ts --outDir dist/server -w",
-    "start-dev": "DEBUG=* ts-node db/server.ts"
+    "build-server": "tsc server/server.ts --outDir dist/server -w",
+    "start-dev": "DEBUG=* ts-node server/server.ts"
   },
   "private": true,
   "dependencies": {
