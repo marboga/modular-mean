@@ -31,7 +31,7 @@ Basically I want to "TypeScript all the things" without having to think about if
 ### Prerequisites
 
 - Node.JS & npm
-- Global install of the [Angular CLI](http://www.github.com/angular-cli) 
+- Global install of the [Angular CLI](http://www.github.com/angular/angular-cli) 
 - MongoDB
 
 ### Installation
