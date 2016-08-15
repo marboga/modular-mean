@@ -1,32 +1,32 @@
 {
   "project": {
     "version": "1.0.0-beta.11-webpack.2",
-    "name": "tsfullstack"
+    "name": "Modular-MEAN"
   },
   "apps": [
     {
-      "main": "src/main.ts",
-      "tsconfig": "src/tsconfig.json",
+      "main": "client/main.ts",
+      "tsconfig": "client/tsconfig.json",
       "mobile": false
     }
   ],
   "addons": [],
   "packages": [],
-  "e2e": {
-    "protractor": {
-      "config": "config/protractor.conf.js"
-    }
-  },
-  "test": {
-    "karma": {
-      "config": "config/karma.conf.js"
-    }
-  },
+  // "e2e": {
+  //   "protractor": {
+  //     "config": "config/protractor.conf.js"
+  //   }
+  // },
+  // "test": {
+  //   "karma": {
+  //     "config": "config/karma.conf.js"
+  //   }
+  // },
   "defaults": {
     "prefix": "app",
-    "sourceDir": "src",
+    "sourceDir": "client",
     "styleExt": "css",
-    "prefixInterfaces": false,
+    "prefixInterfaces": true,
     "lazyRoutePrefix": "+"
   }
 }

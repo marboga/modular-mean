@@ -9,7 +9,7 @@ import { IUser } from './user.interface';
   styleUrls: ['app.component.css']
 })
 
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
 
   nameCollection: Array<IUser> = []
   errorMessage: string;
@@ -31,14 +31,10 @@ export class AppComponent implements OnInit{
   }
 
   createUser( name: string ) {
-    if ( !name ) {
-      return;
-    }
+    if ( !name ) return;
+    
     this.userService.sendUserName( name )
     .subscribe(
       user =>  this.nameCollection.push(user),
-      error => this.errorMessage = error
-    )
-  }
-
+      error => this.errorMessage = error)}
 }
