@@ -1,9 +1,19 @@
-import * as mongoose from 'mongoose';
+const mongoose = require( 'mongoose' )
+mongoose.Promise = global.Promise
 
-const URI: string = "mongodb://localhost:27017/test"
-export const db = mongoose.connect( URI ).connection
+export class MongoDBConfig {
+  private _URI: string = "mongodb://localhost:27017/test"
+  private db;
 
-db.on( 'error', console.error.bind( console, 'connection error:' ) )
-db.once( 'open', () => {
-  console.log(`MongoDB connection instantiated`);
-})
+  constructor() {
+    this.db = mongoose.connect( this._URI ).connection
+    this.dbConnect()
+  }
+
+  private dbConnect() {
+    this.db.on( 'error', console.error.bind( console, 'Connection error:' ) )
+    this.db.once( 'open', () => {
+      console.log( `MongoDB connection instantiated` );
+    })
+  }
+}

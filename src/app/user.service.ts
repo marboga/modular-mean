@@ -1,25 +1,29 @@
-import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
-import './shared/rxjs-operators';
+import './shared/index';
+
+import { IUser } from './user.interface';
 
 @Injectable()
 export class UserService {
+  
+  private apiUrl = 'http://localhost:8000/api'
+
   // Instantiate private Http module when class is instantiated
   constructor( private http: Http ) { }
 
-  private apiUrl = 'http://localhost:8000/api'
-
-  getUsers(): Observable<[Object]>{
+  getUsers(): Observable<[IUser]>{
     return this.http.get( this.apiUrl )
       .map( this.extractData )
       .catch( this.handleError )
   }
-  sendUserName( name: string ): Observable<Object> {
-    let body = JSON.stringify( { name })
-    let headers = new Headers( { 'Content-Type': 'application/json' })
-    let options = new RequestOptions( { headers: headers })
+  
+  sendUserName( name: string ): Observable<IUser> {
+    let body = JSON.stringify( { name }),
+      headers = new Headers( { 'Content-Type': 'application/json' }),
+      options = new RequestOptions( { headers: headers })
 
     return this.http.post( this.apiUrl, body, options )
       .map( this.extractData )
@@ -35,7 +39,7 @@ export class UserService {
     return Observable.throw( errMsg );
   }
 
-  private extractData( res: Response ) {
+  private extractData( res: Response ): IUser {
     let body = res.json();
     return body || {};
   }

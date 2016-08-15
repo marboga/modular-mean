@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { UserService } from './user.service';
+import { IUser } from './user.interface';
 
 @Component( {
   selector: 'app-root',
@@ -9,8 +10,8 @@ import { UserService } from './user.service';
 })
 
 export class AppComponent implements OnInit{
-  title = 'app works!';
-  nameCollection: Array<Object> = []
+
+  nameCollection: Array<IUser> = []
   errorMessage: string;
 
   constructor( private userService: UserService ) { }
@@ -29,7 +30,7 @@ export class AppComponent implements OnInit{
       error => this.errorMessage = error)
   }
 
-  addName( name: string ) {
+  createUser( name: string ) {
     if ( !name ) {
       return;
     }

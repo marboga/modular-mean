@@ -1,46 +1,38 @@
+import { urlencoded, json } from 'body-parser';
 import * as express from 'express';
-import { Router, Request, Response } from 'express';
-import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
+import * as http from 'http';
 
-const mongoose = require('mongoose')
-mongoose.Promise = global.Promise
+import { MongoDBConfig, router } from './index';
 
-import { db, UserModel } from './index';  
 
-const PORT: number = process.env.PORT || 8000
-const app: express.Application = express()
-const API = db
+class ExpressServer {
 
-let User = UserModel
+  constructor(
+    private _app: express.Application = express(),
+    private _PORT: number = process.env.PORT || 8000
+  ) {
+    this.setMiddleWare()
+    this.setRoutes()
+  }
 
-app.use(cors())
-app.use( bodyParser.urlencoded( { extended: true }) )
-app.use( bodyParser.json() )
+  private setMiddleWare() {
+    this._app.use( cors() )
+    this._app.use( urlencoded( { extended: true }) )
+    this._app.use( json() )
+  }
 
-let router: Router = express.Router()
+  private setRoutes() {
+    this._app.use( '/api', router )
+  }
 
-router.route( '/' )
-  .post(( req: Request, res: Response ) => {
-    let name = req.body.name
-    let user = new User( { name: name })
-    
-    let userPromise = user.save()
-
-    userPromise.then((user) => {
-      res.send(user)
+  startServer() {
+    return this._app.listen( this._PORT, () => {
+      console.log( `Express server listening on port ${this._PORT}` );
     })
-  })
-  .get(( req: Request, res: Response ) => {
-    let userPromise = User.find().exec()
-      
-    userPromise.then(( user ) => {
-      res.send(user)
-    })
-  })
+  }
 
-app.use( '/api', router )
+}
 
-app.listen( PORT, function () {
-  console.log( `Listening on port: ${PORT}` )
-})
+let server = new ExpressServer().startServer()
+let db = new MongoDBConfig()
