@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express';
 import { UserModel as User } from '../index'
 
 
-export const router = Router()
+const router: Router = Router()
 
 router.route( '/' )
   .post(
@@ -20,3 +20,5 @@ router.route( '/' )
         res.send( user )}
     )
   })
+
+export { router }
